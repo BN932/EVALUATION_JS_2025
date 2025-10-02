@@ -1,4 +1,4 @@
-export default function (contactsList){    
+export default function (){    
     return `  
       <!-- Aside gauche pour le formulaire -->
       <aside class="form w-1/3 bg-gray-200 p-6 pb-12">
@@ -67,7 +67,6 @@ export default function (contactsList){
             </tr>
           </thead>
           <tbody class="contactList">
-            ${contactsList.contacts.map((contact)=>contact.render()).join('')}
           </tbody>
         </table>
       </section>

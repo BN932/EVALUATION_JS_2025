@@ -2,7 +2,7 @@ export default function(contact){
             
         return `
             
-            <tr class="contact-row" data="${contact.id}">
+            <tr class="contact-row" data-id="${contact.id}">
               <td class="p-4">
                 <span class="isEditing-hidden">${contact.firstname}</span>
                 <input

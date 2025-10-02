@@ -13,4 +13,8 @@ export default class DB{
     static async deleteContact(id){
         const response = await fetch(this.url + "contactList/" + id, {method: 'DELETE'});
     }
+    static async updateContact(data){
+        const response = await fetch(this.apiURL + "contactList/" + data.id, {method: 'PUT', headers: { "Content-Type": "application/json" }, body: JSON.stringify({firstname: data.firstname, lastname: data.lastname, email: data.email, id: data.id})});
+        console.log(response.json());
+    }
 }
