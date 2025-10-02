@@ -10,11 +10,10 @@ export default class DB{
         const response = await fetch(this.url + "contactList", {method: 'POST', headers: { "Content-Type": "application/json" }, body: JSON.stringify({firstname: content.firstname, lastname: content.lastname, email: content.email}),})
         return response.json();
     }
-    static async deleteContact(id){
+    static async deleteOneById(id){
         const response = await fetch(this.url + "contactList/" + id, {method: 'DELETE'});
     }
-    static async updateContact(data){
-        const response = await fetch(this.apiURL + "contactList/" + data.id, {method: 'PUT', headers: { "Content-Type": "application/json" }, body: JSON.stringify({firstname: data.firstname, lastname: data.lastname, email: data.email, id: data.id})});
-        console.log(response.json());
+    static async updateOneById(data){
+        const response = await fetch(this.url + "contactList/" + data.id, {method: 'PUT', headers: { "Content-Type": "application/json" }, body: JSON.stringify({firstname: data.firstname, lastname: data.lastname, email: data.email, id: data.id})});
     }
 }
