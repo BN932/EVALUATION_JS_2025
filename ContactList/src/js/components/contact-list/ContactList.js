@@ -33,6 +33,7 @@ export default class ContactsList {
       let lastname = "";
       let email = "";
       const form = this.target.querySelector('.form');
+      //Set up listener on the form fields, capture the event & store the form field in the matching variable.
       form.querySelector('.firstname').addEventListener('input', (e) =>{
             firstname = e.target;
       })
@@ -42,6 +43,7 @@ export default class ContactsList {
       form.querySelector('.email').addEventListener('input', (e) =>{
             email = e.target;
       })
+      //Set up listener on submit btn, capture event, launch method addContact with values collected earlier and reset form field values.
       form.querySelector('.addContact').addEventListener('click', () =>{
           this.addContact({firstname: firstname.value, lastname: lastname.value, email: email.value});
           firstname.value = "";
