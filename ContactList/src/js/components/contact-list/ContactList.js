@@ -12,39 +12,65 @@ export default class ContactsList {
     async loadContacts() {
         const contactList = await DB.findAll();
         this.contacts = contactList.map((contact) => new Contact(contact));
-        this.render();
+        this.render(this.contacts);
         this.getContactCount();
     }
-    render(){
+    render(list){
         this.target.innerHTML = templateList();
-        this.contacts.forEach((contact => {contact.render(this.target.querySelector('.contactList'))}));
+        list.forEach((contact => {contact.render(this.target.querySelector('.contactList'))}));
         this.initEars();
     }
 
     getContactCount(){
       this.target.querySelector('.count').innerText = this.contacts.length;
     }
+    filterByKey(contact){
+      if(contact.firstname.includes(this)  || contact.lastname.includes(this) || contact.email.includes(this) ) {return contact};
+    };
 
     initEars(){
       let firstname = "";
       let lastname = "";
       let email = "";
       const form = this.target.querySelector('.form');
-        form.querySelector('.firstname').addEventListener('input', (e) =>{
+      form.querySelector('.firstname').addEventListener('input', (e) =>{
             firstname = e.target;
-          })
-        form.querySelector('.lastname').addEventListener('input', (e) =>{
+      })
+      form.querySelector('.lastname').addEventListener('input', (e) =>{
             lastname = e.target;
-          });
-          form.querySelector('.email').addEventListener('input', (e) =>{
+      });
+      form.querySelector('.email').addEventListener('input', (e) =>{
             email = e.target;
-          })
-        form.querySelector('.addContact').addEventListener('click', () =>{
+      })
+      form.querySelector('.addContact').addEventListener('click', () =>{
           this.addContact({firstname: firstname.value, lastname: lastname.value, email: email.value});
           firstname.value = "";
           lastname.value = "";
           email.value = "";
-        })
+      })
+      this.target.querySelector('.searchBar').addEventListener('change', (e) => {
+          const filter = e.target.value;
+          const filteredContactsList = this.contacts.filter(this.filterByKey, filter);
+          this.render(filteredContactsList);
+      })
+      this.target.querySelector('.sort-firstname').addEventListener('click', (e) => {
+        const contacts = this.contacts;
+        const sortedContacts = contacts.sort((a,b) => a.firstname.localeCompare(b.firstname));
+        this.render(sortedContacts);
+      })
+
+      this.target.querySelector('.sort-lastname').addEventListener('click', (e) => {
+        const contacts = this.contacts;
+        const sortedContacts = contacts.sort((a,b) => a.lastname.localeCompare(b.lastname));
+        this.render(sortedContacts);
+      })
+
+      this.target.querySelector('.sort-email').addEventListener('click', (e) => {
+        const contacts = this.contacts;
+        const sortedContacts = contacts.sort((a,b) => a.email.localeCompare(b.email));
+        this.render(sortedContacts);
+      })
+
     };
 
     async addContact(data) {
@@ -54,5 +80,5 @@ export default class ContactsList {
       const contactListElt = this.target.querySelector('.contactList');
       newContact.render(contactListElt);
       this.getContactCount();
-  }
+  };
 };

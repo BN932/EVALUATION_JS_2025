@@ -1,3 +1,4 @@
+import './style.css';
 import templateContact from './template.js';
 import DB from '../../DB.js';
 export default class Contact{
