@@ -55,7 +55,7 @@ export default class ContactsList {
           const filteredContactsList = this.contacts.filter(this.filterByKey, filter);
           this.render(filteredContactsList);
       })
-      this.target.querySelector('.sort-firstname').addEventListener('click', (e) => {
+      /*this.target.querySelector('.sort-firstname').addEventListener('click', (e) => {
         const contacts = this.contacts;
         const sortedContacts = contacts.sort((a,b) => a.firstname.localeCompare(b.firstname));
         this.render(sortedContacts);
@@ -71,7 +71,16 @@ export default class ContactsList {
         const contacts = this.contacts;
         const sortedContacts = contacts.sort((a,b) => a.email.localeCompare(b.email));
         this.render(sortedContacts);
-      })
+      })*/
+
+      this.target.querySelectorAll('.sort').forEach((category)=>{
+        category.addEventListener('click', (e) => {
+          const contacts = this.contacts
+          const key = e.target.innerText.toLowerCase();
+          const sortedContacts = contacts.sort((a,b) => a[key].localeCompare(b[key]));
+        this.render(sortedContacts);
+        });
+      });
 
     };
 

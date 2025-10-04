@@ -57,12 +57,12 @@ export default function (){
           <thead>
             <tr class="bg-gray-200">
               <th class="text-left p-4 rounded-tl-lg">
-                <a class="sort-firstname" href="#">Firstname</a>
+                <a class="sort" href="#">Firstname</a>
               </th>
               <th class="text-left p-4">
-              <a class="sort-lastname" href="#">Lastname</a></th>
+              <a class="sort" href="#">Lastname</a></th>
               <th class="text-left p-4">
-                <a class="sort-email" href="#">Email</a>
+                <a class="sort" href="#">Email</a>
               </th>
               <th class="text-right p-4 rounded-tr-lg">Actions</th>
             </tr>
