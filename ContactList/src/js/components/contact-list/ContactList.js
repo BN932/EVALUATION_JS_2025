@@ -28,6 +28,10 @@ export default class ContactsList {
     filterByKey(contact){
       if(contact.firstname.includes(this)  || contact.lastname.includes(this) || contact.email.includes(this) ) {return contact};
     };
+    displaySearchResults(results){
+      this.target.querySelector('.contactList').innerHTML="";
+          results.forEach((contact => {contact.render(this.target.querySelector('.contactList'))}));
+    }
 
     initEars(){
       let firstname = "";
@@ -54,32 +58,17 @@ export default class ContactsList {
       this.target.querySelector('.searchBar').addEventListener('change', (e) => {
           const filter = e.target.value;
           const filteredContactsList = this.contacts.filter(this.filterByKey, filter);
-          this.render(filteredContactsList);
+          this.displaySearchResults(filteredContactsList);
       })
-      /*this.target.querySelector('.sort-firstname').addEventListener('click', (e) => {
-        const contacts = this.contacts;
-        const sortedContacts = contacts.sort((a,b) => a.firstname.localeCompare(b.firstname));
-        this.render(sortedContacts);
-      })
-
-      this.target.querySelector('.sort-lastname').addEventListener('click', (e) => {
-        const contacts = this.contacts;
-        const sortedContacts = contacts.sort((a,b) => a.lastname.localeCompare(b.lastname));
-        this.render(sortedContacts);
-      })
-
-      this.target.querySelector('.sort-email').addEventListener('click', (e) => {
-        const contacts = this.contacts;
-        const sortedContacts = contacts.sort((a,b) => a.email.localeCompare(b.email));
-        this.render(sortedContacts);
-      })*/
 
       this.target.querySelectorAll('.sort').forEach((category)=>{
         category.addEventListener('click', (e) => {
           const contacts = this.contacts
           const key = e.target.innerText.toLowerCase();
           const sortedContacts = contacts.sort((a,b) => a[key].localeCompare(b[key]));
-        this.render(sortedContacts);
+          this.getContactCount();
+          this.initEars();
+        //this.render(sortedContacts);
         });
       });
 
