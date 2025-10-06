@@ -18,6 +18,7 @@ export default class ContactsList {
     render(list){
         this.target.innerHTML = templateList();
         list.forEach((contact => {contact.render(this.target.querySelector('.contactList'))}));
+        this.getContactCount();
         this.initEars();
     }
 
